@@ -1,0 +1,43 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "crypto": [
+        "node_modules/crypto-js"
+      ],
+      "os": [
+        "node_modules/os-browserify"
+      ],
+      "stream": [
+        "node_modules/stream-browserify"
+      ],
+      "http": [
+        "node_modules/https-browserify"
+      ],
+      "https": [
+        "node_modules/https-browserify"
+      ],
+      "vm": [
+        "node_modules/vm-browserify"
+      ],
+    }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}

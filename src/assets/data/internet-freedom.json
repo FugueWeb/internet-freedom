@@ -1,0 +1,12 @@
+[
+    {
+        "id": "0",
+        "name": "Universal Declaration of Human Rights",
+        "eth": "UDHR",
+        "link": "./assets/data/universal-dec-hr.pdf",
+        "image":"./assets/images/logo.png",
+        "color": "#f7e7e8",
+        "request":{"type":"GET","url":"api/v0/if/0"}
+    }
+]
+

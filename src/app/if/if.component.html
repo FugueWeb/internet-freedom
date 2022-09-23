@@ -1,0 +1,21 @@
+<mat-spinner *ngIf="!internetFreedom" class="example-margin" [color]="spinnerColor">
+</mat-spinner>
+<mat-grid-list [cols]="breakpoint" rowHeight="2:1" (window:resize)="onResize($event)" *ngIf="internetFreedom">
+  <!-- <a *ngFor="let i of internetFreedom" class="col-1-4"
+    routerLink="/evaluators/{{i.id}}"> -->
+  <a *ngFor="let i of internetFreedom" class="col-1-4" href="{{i.link}}" target="_blank">
+    <mat-grid-tile class="gradient-bw">
+    <!-- <mat-grid-tile [style.background-image]="'url('+ i.image +')'"> -->
+      <!-- <mat-grid-tile [style.background]="evaluator.color"> -->
+      <div class="example-ripple-container mat-elevation-z4" matRipple [matRippleCentered]="centered"
+        [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded" [matRippleRadius]="radius"
+        [matRippleColor]="color" [style.background-color]="i.color">
+        <h2>{{i.name}}</h2>
+      </div>
+      <mat-grid-tile-header>
+        <h3>{{i.eth}}</h3>
+      </mat-grid-tile-header>
+    </mat-grid-tile>
+  </a>
+</mat-grid-list>
+<!-- <app-data></app-data> -->
