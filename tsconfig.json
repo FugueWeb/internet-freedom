@@ -7,7 +7,10 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "module": "es2020",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "module": "es2022",
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
@@ -17,7 +20,7 @@
     ],
     "paths": {
       "crypto": [
-        "node_modules/crypto-js"
+        "node_modules/crypto-browserify"
       ],
       "os": [
         "node_modules/os-browserify"

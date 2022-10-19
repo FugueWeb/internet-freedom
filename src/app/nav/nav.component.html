@@ -5,7 +5,8 @@
     </button>
     <h1 class="example-app-name">Internet Freedom</h1>
     <span class="example-spacer"></span>
-    <a mat-icon-button href="https://app.ens.domains/address/0xcfec1AB8C6Aa6145A5A6E4b145cF93ffE8A81a04" target="_blank" title="Github">
+    <a mat-icon-button href="https://app.ens.domains/address/0xcfec1AB8C6Aa6145A5A6E4b145cF93ffE8A81a04" target="_blank"
+      title="Github">
       <mat-icon class="example-icon">domain_verification</mat-icon>
     </a>
     <a mat-icon-button href="https://github.com/fugueweb/internet-freedom" target="_blank" title="Github">
@@ -19,6 +20,12 @@
       <mat-nav-list>
         <a mat-list-item routerLinkActive="active-link" routerLink="/if" (click)="snav.close()">
           <mat-icon class="snav-icon">lan</mat-icon> Home
+        </a>
+        <a mat-list-item routerLinkActive="active-link" routerLink="/vote" (click)="snav.close()">
+          <mat-icon class="snav-icon">how_to_vote</mat-icon> Vote
+        </a>
+        <a mat-list-item routerLinkActive="active-link" routerLink="/nft" (click)="snav.close()">
+          <mat-icon class="snav-icon">token</mat-icon> NFT
         </a>
         <a mat-list-item routerLinkActive="active-link" routerLink="/about" (click)="snav.close()">
           <mat-icon class="snav-icon">info</mat-icon> About

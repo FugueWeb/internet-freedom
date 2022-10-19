@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col-6">
+    <mat-card class="readOnly">
+      <mat-card-header>
+        <button mat-card-avatar mat-icon-button (click)="openDialog('wallet')">
+          <mat-icon class="iconMargin">info</mat-icon>
+        </button>
+        <mat-card-title>Wallet</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <button mat-card-avatar mat-icon-button title="Copy address" (click)="copyText(voteModel.account)">
+          <mat-icon class="iconMargin">content_copy</mat-icon>
+          {{voteModel.account}}
+        </button>
+        <p>Amount of DAO Tokens: <span id="balance">{{voteModel.balance}}</span></p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-6">
+    <mat-card class="readOnly" [formGroup]="getProposalForm">
+        <mat-card-header>
+          <button mat-card-avatar mat-icon-button (click)="openDialog('getProposal')">
+            <mat-icon class="iconMargin">info</mat-icon>
+          </button>
+          <mat-card-title>Get Proposal Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <span *ngIf="proposalModel.tx != null"><button mat-card-avatar mat-icon-button title="Copy Proposal ID" (click)="copyText(proposalModel.id)">
+            <mat-icon class="iconMargin">content_copy</mat-icon>
+          </button></span>
+          <mat-form-field id="prop-selector" class="address-field">
+            <mat-select name="proposal" [(ngModel)]="selectedProposal" placeholder="Prop ID" formControlName="required">
+              <mat-option *ngFor="let p of proposalModel.proposals" [value]="p">{{p.id}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="getProposalForm.invalid">{{getProposalErrorMsg('empty')}}</mat-error>
+          </mat-form-field>
+          <button mat-raised-button [disabled]="!getProposalForm.valid"
+            (click)="getProposalDetails(selectedProposal)">Go</button>
+
+            <span *ngIf="proposalModel.tx != null"><strong>Deadline:</strong> {{proposalModel.deadline}} | <strong>ETA:</strong>
+            {{proposalModel.eta}} | <strong>Snapshot:</strong> {{proposalModel.snapshot}}
+            <a mat-icon-button href="https://goerli-optimism.etherscan.io/tx/{{proposalModel.tx}}" target="_blank" title="Etherscan">
+              <mat-icon class="example-icon">open_in_new</mat-icon>
+            </a>
+            <a mat-icon-button href="https://www.tally.xyz/governance/eip155:420:0xcDbeE6389C1215e659354465d8413438C8c94aE1/proposal/{{proposalModel.id}}" target="_blank" title="Tally">
+              <mat-icon class="example-icon">open_in_new</mat-icon>
+            </a><br>
+            <strong>{{proposalModel.title}}</strong>
+          </span>
+        </mat-card-content>
+      </mat-card>
+  </div>
+</div> <!-- end row -->
+
+
+<div class="row">
+  <div class="col-6">
+    <mat-card [formGroup]="voteForm" class="canCall">
+      <mat-card-header>
+        <button mat-card-avatar mat-icon-button (click)="openDialog('vote')">
+          <mat-icon class="iconMargin">info</mat-icon>
+        </button>
+        <mat-card-title>Vote</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Proposal ID" (change)="setProposalID($event)"
+            formControlName="proposalID">
+          <mat-error *ngIf="voteForm.invalid">{{voteErrorMsg('proposalID')}}</mat-error>
+        </mat-form-field>
+        <!-- [(value)]="voteModel.choice" -->
+        <mat-select name="vote" class="small-mat-select" [(ngModel)]="selectedChoice" placeholder="Cast Vote"
+          formControlName="required1">
+          <mat-option value="for">For</mat-option>
+          <mat-option value="against">Against</mat-option>
+          <mat-option value="abstain">Abstain</mat-option>
+        </mat-select>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Reason" (change)="setReason($event)"
+            formControlName="required2">
+          <mat-error *ngIf="voteForm.invalid">{{voteErrorMsg('required2')}}</mat-error>
+        </mat-form-field>
+        <button mat-raised-button (click)="vote(selectedChoice)" [disabled]="!voteForm.valid">Vote</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-6">
+    <mat-card [formGroup]="delegateForm" class="canCall">
+      <mat-card-header>
+        <button mat-card-avatar mat-icon-button (click)="openDialog('delegate')">
+          <mat-icon class="iconMargin">info</mat-icon>
+        </button>
+        <mat-card-title>Delegate</mat-card-title>
+      </mat-card-header>
+      <mat-form-field class="address-field">
+        <input type="text" matInput placeholder="Delegate Address" (change)="setDelegate($event)"
+          formControlName="addr">
+        <mat-error *ngIf="delegateForm.invalid">{{delegateErrorMsg('addr')}}</mat-error>
+      </mat-form-field>
+        <button mat-raised-button (click)="delegate()" [disabled]="!delegateForm.valid">Delegate</button>
+    </mat-card>
+  </div>
+</div> <!-- end row -->

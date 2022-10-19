@@ -6,7 +6,6 @@
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
-/build
 /misc
 notes.md
 .angular
@@ -45,8 +44,8 @@ yarn-error.log
 testem.log
 /typings
 package-lock.json
-# /src/environments/environment.prod.ts
-# /src/environments/environment.ts
+/src/environments/environment.prod.ts
+/src/environments/environment.ts
 /src/app/if-detail
 /src/assets/images
 

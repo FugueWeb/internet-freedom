@@ -7,6 +7,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 //Uncomment for local development without live server/API
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './services/in-memory-data.service';
+// import { Web3Service } from './services/web3.service';
+// import { TxService } from './services/transaction.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppMaterialModule } from './app-material.module';
@@ -19,6 +21,8 @@ import { IFComponent } from './if/if.component';
 import { AboutComponent } from './about/about.component';
 import { NavComponent } from './nav/nav.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { VoteComponent } from './vote/vote.component';
+import { NFTComponent } from './nft/nft.component';
 
 @NgModule({
   imports: [
@@ -42,7 +46,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     IFComponent,
     AboutComponent,
     NavComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    VoteComponent,
+    NFTComponent
   ],
   providers: [RequestCache,
     { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true }
