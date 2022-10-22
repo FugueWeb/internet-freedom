@@ -90,7 +90,7 @@ export class VoteComponent implements OnInit, OnDestroy {
     this.voteForm = this.fb.group({
       required1: ['', Validators.required],
       required2: ['', Validators.required],
-      proposalID: ['', [Validators.required, Validators.minLength(77), Validators.maxLength(77)]],
+      proposalID: ['', [Validators.required, Validators.minLength(77), Validators.maxLength(78)]],
     });
 
     this.delegateForm = this.fb.group({
