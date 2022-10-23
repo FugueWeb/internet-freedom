@@ -1,18 +1,227 @@
 <div class="row ff-body">
   <div class="col-6">
-    <h2>Use Cases</h2>
+    <h2 id="about">Welcome</h2>
+    <p>Welcome to a new kind of internet. This site combines the following capabilities to create a censorship resistant
+      experience for information sharing, human organization, token-based economics, and artistic expression. It
+      leverages the following technologies:</p>
     <ul>
-        <li>Censorship resistance</li>
-        <li>Internet resilience</li>
-        <li>Open source code and protocols</li>
+      <li>Decentralize Autonomous Organizations (DAO)</li>
+      <li>Ethereum Name Service (ENS)</li>
+      <li>Inter-planetary File System (IPFS)</li>
+      <li>Non-fungible Tokens (NFT)</li>
+    </ul>
+    <p>Each one of these tools merits its own discussion, but they all in their own way strive to decentralize control,
+      promote internet resilience, support open source code or protocols, and empower the user with digital sovereignty.
+    </p>
+    <h2 id="quick-start">Quick Start</h2>
+    <p>To interface with the DAO, the following conditions must be true, all of which can be checked or implemented
+      within this decentralized application (dapp).</p>
+    <ol>
+      <li>You must have a <code>balance</code> of DAO tokens</li>
+      <li>You must be on the <code>Optimism Goerli</code> testnet with a balance of <code>ether</code> to pay
+        transaction fees </li>
+      <li>You must <code>delegate</code> your tokens to yourself (or appropriate delegate) for voting power</li>
+      <li>There must be an active proposal with an open voting window</li>
+    </ol>
+    <h2 id="resources">Resources</h2>
+    <ul>
+      <li><a class="if-link" target="_blank" href="https://docs.ens.domains/">ENS</a></li>
+      <li><a class="if-link" target="_blank" href="https://ipfs.tech/">IPFS</a></li>
+      <li><a class="if-link" target="_blank" href="https://docs.openzeppelin.com/contracts/4.x/">Open Zeppelin</a></li>
+      <li><a class="if-link" target="_blank" href="https://www.optimism.io/">Optimism</a></li>
+      <li><a class="if-link" target="_blank" href="https://app.fleek.co/">Fleek</a></li>
+      <li><a class="if-link" target="_blank" href="https://angular.io/">Angular</a></li>
     </ul>
   </div><!-- end col -->
   <div class="col-6">
-    <h2>Resources</h2>
+    <h2 id="dao-instructions">DAO Instructions</h2>
+    <p><strong>Install a Web3 Wallet</strong> - For desktop, please install the Metamask browser extension. For mobile
+      devices, please install either the Metamask or Status app. Some other Web3 wallets are compatible, but have not
+      yet been tested.</p>
+    <p><strong>Connect to the Optimism Goerli testnet</strong> - The DAO is not deployed on the Ethereum mainnet, which
+      would require use real ETH (which has market value). Rather, it utilizes a layer two test network (Optimism's
+      Goerli testnet), affording massive transaction efficiency benefits and greatly reduces transaction fees. See
+      section below on <em>Network Connections</em>.</p>
+    <p><strong>Get DAO Tokens</strong> - These will be provided by the DAO administration upon requesting to join the
+      DAO. DAO governance tokens are used for weighted voting, but also carry other economic properties.</p>
+    <p><strong>Get Optimism Goerli Test ETH</strong> - This is required to make state changing transactions (i.e., you
+      have to pay transaction fees) with the DAO, such as casting a vote. If this is not provided to you by the DAO
+      administrator, see section below on <em>Faucets</em> to acquire some yourself.</p>
+    <p><strong>Delegate Your Tokens</strong> - If you have followed the steps above, you are now ready to interact with
+      the DAO. First, you need to delegate your voting power (your tokens) to an address that will cast votes. This will
+      likely be to yourself, so copy your wallet <code>address</code> into the field for the <code>delegate</code>
+      function and initiate the transaction.</p>
+    <p><strong>Learn More About Proposals</strong> - Before voting, you might want to research the proposal. The
+      <code>Get Proposal Details</code> function gives several different pieces of information (see <em>Proposals</em>
+      section below), but perhaps of most interst are the two links. One is to a block explorer that
+      provides more details about when the proposal transaction was submitted to the blockchain. The other is to <a
+        class="if-link" target="_blank" href="https://www.tally.xyz/">Tally</a>, a platform that provides a clean
+      application frontend
+      about the DAO and
+      its proposals.</p>
+    <p><strong>Vote</strong> - Assuming there is an active <code>proposal</code>, you can cast your vote by copying the
+      <code>proposalID</code> (you can get the ID from the drop down menu under <code>Get Proposal Details</code>) into
+      the correct field within the <code>vote</code> function. Next make your choice (For, Against, Abstain) and provide
+      a reason/comment.</p>
+  </div><!-- end col -->
+</div><!-- end row -->
+
+<div class="row ff-body">
+  <div class="col-6">
+    <h2 id="smart-contracts">Smart Contracts</h2>
+    <p>The DAO consists of three smart contracts, all based on the Open Zeppelin standard. </p>
     <ul>
-        <li><a href="https://docs.ens.domains/" target="_blank">Ethereum Name System (ENS)</a></li>
-        <li><a href="https://ipfs.tech" target="_blank">Inter-Planetary File System (IPFS)</a></li>
-        <li><a href="https://medium.com/the-ethereum-name-service/cloudflare-and-fleek-make-ens-ipfs-site-deployment-as-easy-as-ever-262c990a7514" target="_blank">Fleek Makes Deploying and Maintaining an ENS+IPFS Website Easier than Ever</a></li>
+      <li><a class="if-link" target="_blank"
+          href="https://goerli-optimism.etherscan.io/address/0x5c9747dc38569DFC9bE46d27Cb9F3489dc779CAD">ERC20
+          token</a>: An ERC20 token contract keeps track of fungible tokens: any one token is exactly equal to any other
+        token; no tokens have special rights or behavior associated with them. This makes ERC20 tokens useful for things
+        like a medium of exchange currency, voting rights, staking, and more.</li>
+      <li><a class="if-link" target="_blank"
+          href="https://goerli-optimism.etherscan.io/address/0xcdbee6389c1215e659354465d8413438c8c94ae1#code">Governor</a>:
+        The protocol is governed and upgraded by DAO token-holders, using three distinct components; the token,
+        governance module, and Timelock. Together, these contracts allow the community to propose, vote, and implement
+        changes through various administrative functions. Proposals can modify system parameters, support new markets,
+        or add entirely new functionality to the protocol.</li>
+      <li><a class="if-link" target="_blank"
+          href="https://goerli-optimism.etherscan.io/address/0xac4ab72cca73fa44ad44ff05b5f21f3a0d56c16d">Timelock</a>:
+        Each protocol contract is controlled by the Timelock contract, which can modify system parameters, logic, and
+        contracts in a 'time-delayed, opt-out' upgrade pattern. The Timelock has a hard-coded minimum delay,
+        which is the least amount of notice possible for a governance action. The Timelock contract queues and executes
+        proposals that have passed a Governance vote.</li>
+    </ul>
+    <p>Additionally, the DAO controls an <a class="if-link" target="_blank"
+        href="https://goerli-optimism.etherscan.io/address/0x3915De57566b296b0C2a2a545Bd451DF89208A91">NFT smart
+        contract</a> entitled <code>In Memorium</code>, and is focused on commemorating historical events or individuals
+      that further core human rights principles.</p>
+    <h2 id="ipfs-and-ens-integration">IPFS and ENS Integration</h2>
+
+    <p>The entire site is deployed to IPFS and accessible using the name resolution provided through ENS. What does that
+      mean? The tl;dr is the name <code>internetfreedom.eth</code> was reserved on the Ethereum blockchain and can be
+      used to resolve complex content identifiers (hashes) of files deployed to a global peer-to-peer network (IPFS)
+      into human readable form for ease of access. Let's unpack that.</p>
+    <p>First, for a lot of people using traditional browsers, they may be using a privacy preserving IPFS gateway such
+      as <a class="if-link" target="_blank" href="https://eth.limo/">eth.limo</a> to access this site over
+      <code>HTTPS</code> and
+      <code>DNS</code>, rather than pure IPFS. These gateways are useful because core internet infrastructure is
+      becoming increasingly centralized and as such, several existential threats have emerged that undermine the
+      principles of a decentralized, open, and free internet, to include single points of failure (e.g., CDNs), lack of
+      commercial infrastructure, censorship, and the broader nacency of Web3 technology.</p>
+    <p>To access the site using IPFS, one way to do this would be to launch a local <code>ipfs daemon</code>, peer with
+      other nodes, and thereby enable a gateway on <code>localhost</code> at a given port. Then, pulling the <a
+        class="if-link" target="_blank" href="https://docs.ipfs.tech/concepts/ipns/#how-ipns-works">IPNS record</a>
+      stored in the <a class="if-link" target="_blank"
+        href="https://app.ens.domains/name/internetfreedom.eth/details">ENS registry</a> for
+      <code>internetfreedom.eth</code> you open the site in a web browser. So putting this all together, the link may
+      look like <code>http://127.0.0.1:8080/</code> appended with
+      <code>ipns/k51qzi5uqu5dgpuuyts3j2hfdksqy4lsj1gwn4stfrcypjv2up65knq0sgolrd</code>.
+      There are certain browsers such as Brave, Opera, and Firefox that, depending on their settings and configuration
+      or added extensions, <a class="if-link" target="_blank"
+        href="https://blog.ipfs.tech/2019-10-08-ipfs-browsers-update/">may allow</a> for a more
+      native IPFS experience without running a local <code>daemon</code>. </p>
+  </div><!-- end col -->
+  <div class="col-6">
+    <h2 id="about-proposals">DAO Proposals</h2>
+    <p>A proposal submitted to the DAO is subject to various parameters (as defined by/within the DAO) and ultimately,
+      if successful, will execute some state change on the blockchain. This could be minting an NFT, changing monetary
+      policy of the DAO token, or altering the governance policies of the DAO itself. The two main questions here are:
+    </p>
+    <ol>
+      <li>What are the parameters that define or constrain a proposal, its voting period, and its execution?</li>
+      <li>How do I verify that a given proposal is actually what it claims to be before I vote on it?</li>
+    </ol>
+    <p>There are <a class="if-link" target="_blank"
+        href="https://goerli-optimism.etherscan.io/address/0xcdbee6389c1215e659354465d8413438c8c94ae1#readContract">several
+        parameters</a> for a proposal and the ability to cast votes for/against it. Some of the more important ones
+      include:</p>
+    <ul>
+      <li><code>proposalDeadline</code> is the block number at which votes close. </li>
+      <li><code>proposalSnapshot</code> is the block number used to retrieve a user's votes and the quorum. This
+        prevents the ability for users to transfer tokens after voting to vote again.</li>
+      <li><code>quorum</code> is represented as a fraction of the total token supply. Presently, the quorum for the DAO
+        is set at 1%, or 21,000 DAO tokens pledged during a vote.</li>
+      <li><code>votingPeriod</code> is the delay (in number of blocks) since the proposal starts until voting ends.
+        45,000 blocks is roughly a day and a half.</li>
+    </ul>
+    <p>Provided that these criteria are met, a vote can then <code>queue</code> and <code>execute</code>. Proposals are
+      actually executed by the external <code>Timelock</code> contract, thus it is the timelock that has to hold the
+      assets that are being governed. You can think of the <code>Timelock</code> as a check/balance or separation of
+      power within the DAO, and it also has additional capabilities and permissions that ensure the decentralization and
+      autonomy of the DAO.</p>
+    <p>Verification is grounded in cryptography. Anyone voting on a proposal should be able to independently audit, with
+      mathematical certainty, that a proposal will indeed do what it claims to do prior to voting for or against it.
+      Ultimately this is done by confirming that what is stored on the immutable blockchain (such as a
+      <code>proposalID</code>) is identical to the output of someone inputting the parameters of the proposal into a <a
+        class="if-link" target="_blank"
+        href="https://goerli-optimism.etherscan.io/address/0xcdbee6389c1215e659354465d8413438c8c94ae1#readContract#F7">readable
+        function</a>.</p>
+    <p>Using a block explorer, you see that the <a class="if-link" target="_blank"
+        href="https://docs.openzeppelin.com/contracts/4.x/api/governance#Governor-hashProposal-address---uint256---bytes---bytes32-"><code>hashProposal</code></a>
+      function has the following inputs.</p>
+    <ol>
+      <li><code>target</code> - This is the smart contract address (or in the case of ETH value transfer, the recipient
+        address) where the <code>calldata</code> parameter will execute. So for example, if the proposal is to
+        <code>mint</code> and NFT, this would be the address for the NFT smart contract address.</li>
+      <li><code>value</code> - This is the amount of ETH (as provided by the <code>Timelock</code> contract) that can be
+        transfered to a <code>target</code> recipient. This will often be zero, unless for example the proposal were
+        intended to provide funding. It is worth noting that transfer of ETH (a utility token with market value on
+        mainnet) should not be confused with transfer of DAO tokens (a governance or security token), which is a
+        function of the <code>ERC20 Token</code> contract owned by the DAO.</li>
+      <li><code>calldata</code> - This parameter is where DAOs draw their power, because it is what will actually
+        execute a state change on a given <code>target</code> smart contract address if the proposal passes. If you look
+        at the transaction details of a proposal, you can see the <code>calldata</code> that the DAO expects. And if you
+        wanted to check that it is what it claims to be, you would attempt to initiate the proposed transaction (e.g.,
+        mint an NFT, transfer DAO tokens, change the quorum, etc.). This transaction will not succeed because only the
+        DAO is authorized to do these tasks, but it will provide you the <code>calldata</code>, which you can then
+        compare with what is stored on chain.</li>
+      <li><code>descriptionHash</code> - This is the <code>keccak256</code> hash of the description string of the
+        proposal. The easiest way to pull this information is to use <a class="if-link" target="_blank"
+          href="https://remix.ethereum.org/">Remix</a>,
+        and from the command line put in <code>ethers.utils.id('Proposal Description')</code>.</li>
+    </ol>
+    <p>All of this together is hashed to produce the <code>proposalID</code>. If it matches what was provided, you have
+      cryptographically verified the proposal.</p>
+    <h2 id="network-connections">Network Connections</h2>
+    <p><a class="if-link" target="_blank" href="https://chainlist.org/chain/420">Optimism Goerli Testnet</a></p>
+    <ul>
+      <li>ChainID: 420</li>
+      <li>Currency: ETH</li>
+      <li>RPC address: <a class="if-link" target="_blank"
+          href="https://goerli.optimism.io">https://goerli.optimism.io</a></li>
+      <li>Block explorer: <a class="if-link" target="_blank"
+          href="https://goerli-optimism.etherscan.io/">https://goerli-optimism.etherscan.io/</a></li>
+    </ul>
+    <p><a class="if-link" target="_blank" href="https://chainlist.org/chain/5">Goerli Testnet</a></p>
+    <ul>
+      <li>ChainID: 5</li>
+      <li>Currency: ETH</li>
+      <li>RPC address: <a class="if-link" target="_blank"
+          href="https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161">https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161</a>
+      </li>
+      <li>Block explorer: <a class="if-link" target="_blank"
+          href="https://goerli.etherscan.io/">https://goerli.etherscan.io/</a></li>
+    </ul>
+    <h2 id="faucets">Faucets</h2>
+    <p>Faucets provide free <code>ether</code> on test networks. However, in order to prevent spamming and for other
+      security reasons, faucets usually require some type of authentication or login. Additionally, since the DAO is
+      using Optimism (layer 2 scaling), you may need to first get ETH on the Goerli testnet (layer 1), and then
+      &quot;bridge&quot; it to the Optimism Goerli testnet (layer 2). Here are several resources to choose from:</p>
+    <ul>
+      <li><a class="if-link" target="_blank" href="https://faucet.paradigm.xyz/">Paradigm Faucet</a> - Requires a
+        Twitter account with
+        at least 1 Tweet,
+        15 followers, and be older than 1 month.</li>
+      <li><a class="if-link" target="_blank" href="https://goerlifaucet.com/">Alchemy Faucet</a> - To request funds,
+        simply create a
+        free account and
+        sign in with Alchemy, then enter your wallet address.</li>
+      <li><a class="if-link" target="_blank" href="https://optimismfaucet.xyz/">Optimism Faucet</a> - To pass the
+        anti-bot checks your
+        GitHub account
+        must be older than one month and you have to follow five people/projects on GitHub.</li>
+      <li><a class="if-link" target="_blank" href="https://app.optimism.io/bridge/deposit">Optimism Bridge</a> - Once
+        you have that
+        Goerli ETH, use this
+        app to get it on the Optimism Goerli network.</li>
     </ul>
   </div><!-- end col -->
 </div><!-- end row -->

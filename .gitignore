@@ -47,7 +47,6 @@ package-lock.json
 #/src/environments/environment.prod.ts
 #/src/environments/environment.ts
 /src/app/if-detail
-/src/assets/images
 
 # System Files
 .DS_Store

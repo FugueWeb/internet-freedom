@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../utils/dialog.component';
 import { Proposal } from '../models/proposal';
 import { Vote } from '../models/vote';
+import { WalletState } from '../models/walletState';
 
 declare let require: any;
 const token_artifacts = require('../../../build/contracts/DiploCoin.json');
@@ -25,6 +26,8 @@ export class VoteComponent implements OnInit, OnDestroy {
 
     TokenERC20: any;
     Governance: any;
+    public walletState: WalletState[];
+    public walletDisabled: boolean = true;
     selectedProposal: {id: string, tx: string, title: string};
     selectedChoice: string;
     voteModel: Vote = new Vote();
@@ -45,12 +48,13 @@ export class VoteComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.web3Service.walletStateObservable$.unsubscribe();
-    this.web3Service.providerObservable$.unsubscribe();
+    //this.web3Service.walletStateObservable$.unsubscribe();
+    //this.web3Service.providerObservable$.unsubscribe();
   }
 
   watchContract() {
     this.web3Service.walletStateObservable$.subscribe((walletState) => {
+        console.log(walletState);
         this.voteModel.account = walletState[0].accounts[0].address;
     });
 
@@ -68,10 +72,20 @@ export class VoteComponent implements OnInit, OnDestroy {
     });
   }
 
+  connectWallet(change: boolean): void {
+    const result = this.web3Service.blockNativeOnboard();
+
+    if (result){
+        this.walletDisabled = false;
+    } else {
+        this.walletDisabled = true;
+        console.log('could not connect wallet');
+    }
+  }
+
   async getVoteData(account) {
     try {
       const deployedTokenERC20 = await this.TokenERC20.deployed();
-      console.log(deployedTokenERC20);
       this.voteModel.balance = this.web3Service.convertWeitoETH(await deployedTokenERC20.balanceOf.call(account));
 
     } catch (e) {
@@ -237,7 +251,8 @@ export class VoteComponent implements OnInit, OnDestroy {
       width: '400px',
       data: {
         id: choice.id,
-        desc: choice.desc
+        desc: choice.desc,
+        link: choice.link
       },
       panelClass: 'if-dialog'
     });

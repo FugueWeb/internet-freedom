@@ -1,3 +1,10 @@
+## 20221023
+
+* Added NFT functionality
+* Improved blocknative integration
+* Added About/README content for full instructions
+* Improved dialog component and info
+
 ## 20221016
 
 * Added vote and nft components

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NftComponent } from './nft.component';
+import { NFTComponent } from './nft.component';
 
-describe('NftComponent', () => {
-  let component: NftComponent;
-  let fixture: ComponentFixture<NftComponent>;
+describe('NFTComponent', () => {
+  let component: NFTComponent;
+  let fixture: ComponentFixture<NFTComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NftComponent ]
+      declarations: [ NFTComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NftComponent);
+    fixture = TestBed.createComponent(NFTComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

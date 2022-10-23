@@ -11,7 +11,7 @@ import { PageNotFoundComponent }      from './page-not-found/page-not-found.comp
 const routes: Routes = [
 	{
 		path: '',
-		redirectTo: '/if',
+		redirectTo: '/about',
 		pathMatch: 'full'
 	},
 	{

@@ -4,6 +4,7 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 export interface DialogData {
   id: string;
   desc: string;
+  link: string;
 }
 
 @Component({
@@ -15,6 +16,7 @@ export interface DialogData {
   </div>
   <div mat-dialog-actions>
     <button mat-raised-button class="mat-focus-indicator mat-button" (click)="onNoClick()">Ok</button>
+    <a mat-button class="if-link" href="{{data.link}}" target="_blank">Docs</a>
   </div>
   `
 })

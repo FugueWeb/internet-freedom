@@ -1,0 +1,10 @@
+[
+    {
+        "id": 0,
+        "name": "Test",
+        "link": "./assets/images/logo.png",
+        "image":"./assets/images/logo.png",
+        "tx": "0x9b77f943ff169ae7f59c820de0b188902ef402963bf1b36d8035a4104da3595d",
+        "request":{"type":"GET","url":"api/v0/nft/0"}
+    }
+]

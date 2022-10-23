@@ -11,13 +11,13 @@ import { TxService } from './transaction.service';
 import contract from '@truffle/contract';
 
 //declare let window: any;
-//declare let require: any;
+declare let require: any;
 
 /******* BLOCKNATIVE CONFIG ***********/
 
 // Change these parameters depending on network being used and for continuous deployment
-const O_GOERLI_RPC_URL = 'https://optimism-goerli.infura.io/v3/' + process.env.INFURA_OGOERLI_KEY;
-//const O_GOERLI_RPC_URL = 'https://optimism-goerli.infura.io/v3/' + environment.INFURA_OGOERLI_KEY;
+//const O_GOERLI_RPC_URL = 'https://optimism-goerli.infura.io/v3/' + process.env.INFURA_OGOERLI_KEY;
+const O_GOERLI_RPC_URL = 'https://optimism-goerli.infura.io/v3/' + environment.INFURA_OGOERLI_KEY;
 //Change ChainID as required: O-Goerli 0x1A4 / 420 - Ganache 0x539 / 35
 const networkID: number = 420; 
 
@@ -28,11 +28,11 @@ const networkIdToUrl = {
     '420': 'https://goerli-optimism.etherscan.io/tx'
 }
 const notifyOptions: InitOptions = {
-    //dappId: environment.BLOCK_NATIVE_KEY,
-    dappId: process.env.BLOCK_NATIVE_KEY,
+    dappId: environment.BLOCK_NATIVE_KEY,
+    //dappId: process.env.BLOCK_NATIVE_KEY,
     system: 'ethereum',
     networkId: networkID,
-    darkMode: true
+    darkMode: true,
 }
 const notify = Notify(notifyOptions);
 
@@ -92,14 +92,14 @@ export class Web3Service {
 
   constructor(private matSnackBar: MatSnackBar, private txService: TxService) {
     window.addEventListener('load', (event) => {
-      this.blockNativeOnboard();
-      this.web3 = new Web3();
+      //this.blockNativeOnboard();
+      
       setInterval(()=> { this.refresh() }, 60 * 1000);
     });
   }
 
   ngOnDestroy(): void {
-    this.onboardUnsubscribe.unsubscribe();
+    //this.onboardUnsubscribe.unsubscribe();
   }
 
   public async artifactsToContract(artifacts) {
@@ -112,30 +112,34 @@ export class Web3Service {
     console.log('Refreshing state');
     const data: WalletState[] = this.getWalletState();
     this.walletStateObservable$.next([data[0]]);
-    this.providerObservable$.next(this.getWalletState()[0].provider);
+    //this.providerObservable$.next(this.getWalletState()[0].provider);
     this.address = data[0].accounts[0].address;
   }
 
   /******* BLOCKNATIVE FUNCTIONS ***********/
 
   public async blockNativeOnboard() {
+    this.web3 = new Web3();
     const previouslyConnectedWallets = JSON.parse(
         window.localStorage.getItem('connectedWallets')
       )
-      
-      if (previouslyConnectedWallets) {
+    console.log(previouslyConnectedWallets);
+
+    let wallets;      
+    if (previouslyConnectedWallets) {
         // Connect the most recently connected wallet (first in the array)
-        await onboard.connectWallet({ autoSelect: previouslyConnectedWallets[0] });
-      }      
-      
-      const wallets = await onboard.connectWallet();
-      //Require specific chain
-      const success = await onboard.setChain({ chainId: 0x1A4 });
-      this.setBNLocalStorage(wallets);
-      this.web3Provider = this.getWalletState()[0].provider
-      this.providerObservable$.next(this.getWalletState()[0].provider);
-      this.refresh();
-      console.log(wallets)      
+        wallets = await onboard.connectWallet({ autoSelect: { label: previouslyConnectedWallets[0], disableModals: true } });
+    } else {
+        wallets = await onboard.connectWallet();
+    }
+
+    //Require specific chain
+    const success = await onboard.setChain({ chainId: 0x1A4 });
+    this.setBNLocalStorage(wallets);
+    this.web3Provider = this.getWalletState()[0].provider
+    this.providerObservable$.next(this.getWalletState()[0].provider);
+    this.refresh();
+    console.log(wallets)
   }
 
   private setBNLocalStorage(wallets){
@@ -147,6 +151,7 @@ export class Web3Service {
           JSON.stringify(connectedWallets)
         )
       })
+      console.log(this.onboardUnsubscribe)
   }
 
   private notifyBlockNative(self: this, hash) {

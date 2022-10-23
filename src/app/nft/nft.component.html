@@ -1,1 +1,24 @@
-<p>nft works!</p>
+<mat-spinner *ngIf="!nft" class="example-margin" [color]="spinnerColor">
+</mat-spinner>
+<mat-grid-list [cols]="breakpoint" rowHeight="2:1" (window:resize)="onResize($event)" *ngIf="nft">
+  <!-- <a *ngFor="let i of internetFreedom" class="col-1-4"
+    routerLink="/evaluators/{{i.id}}"> -->
+
+  <mat-grid-tile class="gradient-bw" *ngFor="let n of nft" class="col-1-4">
+    <!-- <mat-grid-tile [style.background-image]="'url('+ n.image +')'"> -->
+    <!-- <mat-grid-tile [style.background]="evaluator.color"> -->
+    <a href="{{n.link}}" target="_blank">
+      <div class="example-ripple-container mat-elevation-z4" matRipple [matRippleCentered]="centered"
+        [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded" [matRippleRadius]="radius"
+        [matRippleColor]="color" [style.background-color]="n.color">
+        <img style="width: 100%;height: auto;" src="{{n.image}}" alt="{{n.name}}" title="{{n.name}}" />
+      </div>
+    </a>
+    <mat-grid-tile-header>
+      <h3><a href="https://goerli-optimism.etherscan.io/token/0x3915de57566b296b0c2a2a545bd451df89208a91?a={{n.id}}" style="color: black;" target="_blank">
+          <mat-icon class="iconMargin">info</mat-icon>
+        </a> {{n.name}} | ID: {{n.id}}</h3>
+    </mat-grid-tile-header>
+  </mat-grid-tile>
+
+</mat-grid-list>

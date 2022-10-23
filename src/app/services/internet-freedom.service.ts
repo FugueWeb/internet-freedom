@@ -6,12 +6,14 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 //import { environment } from 'src/environments/environment';
 import { InternetFreedom } from '../models/internet-freedom';
+import { NFT } from '../models/nft';
 import { DebugService } from './debug.service';
 
 @Injectable({ providedIn: 'root' })
 export class InternetFreedomService {
 
     private internetFreedomUrl = 'api/internet_freedom';  // URL to in-memory-data-service api
+    private nftUrl = 'api/nft';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,6 +28,15 @@ export class InternetFreedomService {
           .pipe(
             tap(_ => this.log('fetched InternetFreedom')),
             catchError(this.handleError<InternetFreedom[]>('getInternetFreedom', []))
+          );
+      }
+
+    /** GET NFT from the server */
+    getNFT (): Observable<NFT[]> {
+        return this.http.get<NFT[]>(this.nftUrl)
+          .pipe(
+            tap(_ => this.log('fetched NFT')),
+            catchError(this.handleError<NFT[]>('getNFT', []))
           );
       }
 
