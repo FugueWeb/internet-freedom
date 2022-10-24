@@ -55,7 +55,7 @@ const onboard = Onboard({
       icon: 'assets/images/logo.png',
       logo: 'assets/images/logo.png',
       description: 'Web3 - DAO - ENS - IPFS',
-      gettingStartedGuide: 'todo',
+      gettingStartedGuide: 'https://github.com/fugueweb/internet-freedom',
       explore: 'https://github.com/fugueweb/internet-freedom',
       recommendedInjectedWallets: [ 
         { name: 'Coinbase', url: 'https://wallet.coinbase.com/' },
@@ -187,21 +187,22 @@ export class Web3Service {
       let self = this;
       instance.delegate.sendTransaction( _delegate, {from:self.address}).on('transactionHash', function(hash){
         self.notifyBlockNative(self, hash);
-      })
+      }).catch(e => {
+            console.log(e);
+            this.setStatus('Delegate error, see log');
+        });
   }
 
   /******* GOVERNANCE FUNCTIONS ***********/
 
   public vote(instance, _proposalNum, _choice, _reason) {
       let self = this;
-      try {
         instance.castVoteWithReason.sendTransaction(_proposalNum, _choice, _reason, {from:self.address}).on('transactionHash', function(hash){
             self.notifyBlockNative(self, hash);
-        })
-      } catch (e) {
-        console.log(e);
-        this.setStatus('Vote error, see log');
-      }
+        }).catch(e => {
+            console.log(e);
+            this.setStatus('Vote error, see log');
+        });
   }
 
   /******* HELPER FUNCTIONS ***********/

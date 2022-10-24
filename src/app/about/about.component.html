@@ -17,11 +17,11 @@
     <p>To interface with the DAO, the following conditions must be true, all of which can be checked or implemented
       within this decentralized application (dapp).</p>
     <ol>
-      <li>You must have a <code>balance</code> of DAO tokens</li>
-      <li>You must be on the <code>Optimism Goerli</code> testnet with a balance of <code>ether</code> to pay
-        transaction fees </li>
-      <li>You must <code>delegate</code> your tokens to yourself (or appropriate delegate) for voting power</li>
-      <li>There must be an active proposal with an open voting window</li>
+      <li>You must use a compatible Web3 wallet, such as Metamask or Status.</li>
+      <li>You must have a <code>balance</code> of DAO tokens.</li>
+      <li>You must be on the <code>Optimism Goerli</code> testnet with a balance of <code>ether</code> to pay transaction fees.</li>
+      <li>You must <code>delegate</code> your tokens to yourself (or appropriate delegate) for voting power.</li>
+      <li>There must be an active proposal with an open voting window.</li>
     </ol>
     <h2 id="resources">Resources</h2>
     <ul>
@@ -35,34 +35,25 @@
   </div><!-- end col -->
   <div class="col-6">
     <h2 id="dao-instructions">DAO Instructions</h2>
-    <p><strong>Install a Web3 Wallet</strong> - For desktop, please install the Metamask browser extension. For mobile
-      devices, please install either the Metamask or Status app. Some other Web3 wallets are compatible, but have not
-      yet been tested.</p>
-    <p><strong>Connect to the Optimism Goerli testnet</strong> - The DAO is not deployed on the Ethereum mainnet, which
-      would require use real ETH (which has market value). Rather, it utilizes a layer two test network (Optimism's
-      Goerli testnet), affording massive transaction efficiency benefits and greatly reduces transaction fees. See
-      section below on <em>Network Connections</em>.</p>
+    <p><strong>Install a Web3 Wallet</strong> - For desktop, please install the <a href="https://metamask.io/" target="_blank" class="if-link">Metamask</a> browser extension on your <em>personal</em> device. For any mobile device, please install either the <a href="https://status.im/" target="_blank" class="if-link">Status</a> or <a href="https://metamask.io/" target="_blank" class="if-link">Metamask</a> app. Some other Web3 wallets are compatible but have not yet been tested.</p>
+    <p><strong>Connect Web3 Wallet to Optimism Goerli Testnet</strong> - The DAO is not deployed on the Ethereum mainnet (for now), which
+      would require using real ETH (i.e., a token with market value). Rather, it utilizes a layer two test network - Optimism's
+      Goerli testnet - affording transaction efficiency benefits as well as greatly reduced fees. Each Web3 wallet is a little different, but if you are unable to add it <a class="if-link" target="_blank" href="https://chainlist.org/chain/420">automatically</a>, you'll need to go into the app settings and manually add the Optimism Goerli Testnet as a network. See section below on <em>Network Connections</em> for more details.</p>
     <p><strong>Get DAO Tokens</strong> - These will be provided by the DAO administration upon requesting to join the
       DAO. DAO governance tokens are used for weighted voting, but also carry other economic properties.</p>
-    <p><strong>Get Optimism Goerli Test ETH</strong> - This is required to make state changing transactions (i.e., you
-      have to pay transaction fees) with the DAO, such as casting a vote. If this is not provided to you by the DAO
+    <p><strong>Get Optimism Goerli Test ETH</strong> - This is required to make state changing transactions with the DAO (i.e., you
+      have to pay transaction fees to vote). If this is not provided to you by the DAO
       administrator, see section below on <em>Faucets</em> to acquire some yourself.</p>
     <p><strong>Delegate Your Tokens</strong> - If you have followed the steps above, you are now ready to interact with
       the DAO. First, you need to delegate your voting power (your tokens) to an address that will cast votes. This will
       likely be to yourself, so copy your wallet <code>address</code> into the field for the <code>delegate</code>
-      function and initiate the transaction.</p>
+      function and initiate the transaction. This delegation only needs to be done once if delegating to yourself, but you can later decide to delegate your vote to another DAO participant.</p>
     <p><strong>Learn More About Proposals</strong> - Before voting, you might want to research the proposal. The
-      <code>Get Proposal Details</code> function gives several different pieces of information (see <em>Proposals</em>
-      section below), but perhaps of most interst are the two links. One is to a block explorer that
-      provides more details about when the proposal transaction was submitted to the blockchain. The other is to <a
-        class="if-link" target="_blank" href="https://www.tally.xyz/">Tally</a>, a platform that provides a clean
-      application frontend
-      about the DAO and
-      its proposals.</p>
-    <p><strong>Vote</strong> - Assuming there is an active <code>proposal</code>, you can cast your vote by copying the
-      <code>proposalID</code> (you can get the ID from the drop down menu under <code>Get Proposal Details</code>) into
-      the correct field within the <code>vote</code> function. Next make your choice (For, Against, Abstain) and provide
-      a reason/comment.</p>
+      <code>Get Proposal Details</code> function gives several different pieces of information (see <em>DAO Proposals</em>
+      section below for a deeper dive), but perhaps of most interst are the two links. One is to a block explorer showing the proposal transaction that was submitted to the blockchain. The other is to <a
+        class="if-link" target="_blank" href="https://www.tally.xyz/">Tally</a>, a platform that provides a clean application frontend about the DAO and its proposals.</p>
+    <p><strong>Vote</strong> - Assuming there is an active proposal, you can cast your vote by copying the <code>proposalID</code> (you can <mat-icon class="iconMargin">content_copy</mat-icon> copy the ID from the drop down menu under <code>Get Proposal Details</code>) into
+      the correct field within the <code>vote</code> function. Next make your choice (For, Against, Abstain) and provide a reason/comment.</p>
   </div><!-- end col -->
 </div><!-- end row -->
 
@@ -181,6 +172,7 @@
     <p>All of this together is hashed to produce the <code>proposalID</code>. If it matches what was provided, you have
       cryptographically verified the proposal.</p>
     <h2 id="network-connections">Network Connections</h2>
+    <p>Within your Web3 enabled browser, click the link below for the network you wish to add. Once you connect your wallet, you should have an option to add the network automatically. Otherwise you can input the information manually in your app settings.</p>
     <p><a class="if-link" target="_blank" href="https://chainlist.org/chain/420">Optimism Goerli Testnet</a></p>
     <ul>
       <li>ChainID: 420</li>
