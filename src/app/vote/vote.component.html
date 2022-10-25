@@ -81,7 +81,10 @@
           <input type="text" matInput placeholder="Reason" (change)="setReason($event)" formControlName="required2">
           <mat-error *ngIf="voteForm.invalid">{{voteErrorMsg('required2')}}</mat-error>
         </mat-form-field>
-        <button mat-raised-button (click)="vote(selectedChoice)" [disabled]="!voteForm.valid">Vote</button>
+        <button mat-raised-button (click)="vote(selectedChoice)" [disabled]="!voteForm.valid">Vote</button><br>
+        <span *ngIf="voteTx != null"> 
+          <a class="if-link" href="https://goerli-optimism.etherscan.io/tx/{{voteTx}}" target="_blank" title="Etherscan">View on Etherscan</a>
+        </span>
       </mat-card-content>
     </mat-card>
   </div>
@@ -98,7 +101,10 @@
           formControlName="addr">
         <mat-error *ngIf="delegateForm.invalid">{{delegateErrorMsg('addr')}}</mat-error>
       </mat-form-field>
-      <button mat-raised-button (click)="delegate()" [disabled]="!delegateForm.valid">Delegate</button>
+      <button mat-raised-button (click)="delegate()" [disabled]="!delegateForm.valid">Delegate</button><br>
+      <span *ngIf="delegateTx != null"> 
+        <a class="if-link" href="https://goerli-optimism.etherscan.io/tx/{{delegateTx}}" target="_blank" title="Etherscan">View on Etherscan</a>
+      </span>
     </mat-card>
   </div>
 </div> <!-- end row -->

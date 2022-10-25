@@ -89,6 +89,8 @@ export class Web3Service {
   private address: string;
   public walletStateObservable$ = new Subject < WalletState[] > ();
   public providerObservable$ = new Subject < EIP1193Provider > ();
+  public txDelegateObservable$ = new Subject < String > ();
+  public txVoteObservable$ = new Subject < String > ();
 
   constructor(private matSnackBar: MatSnackBar, private txService: TxService) {
     window.addEventListener('load', (event) => {
@@ -139,7 +141,6 @@ export class Web3Service {
     this.web3Provider = this.getWalletState()[0].provider
     this.providerObservable$.next(this.getWalletState()[0].provider);
     this.refresh();
-    console.log(wallets)
   }
 
   private setBNLocalStorage(wallets){
@@ -151,12 +152,12 @@ export class Web3Service {
           JSON.stringify(connectedWallets)
         )
       })
-      console.log(this.onboardUnsubscribe)
   }
 
   private notifyBlockNative(self: this, hash) {
     const {emitter} = notify.hash(hash);
-    this.txService.txObservable.next(hash);
+    console.log(emitter);
+    //this.txService.txObservable.next(hash);
     emitter.on('all', function(tx) {
         setTimeout(() => {
             self.walletStateObservable$.next(self.getWalletState())},8000
@@ -186,7 +187,8 @@ export class Web3Service {
   public delegate(instance, _delegate) {
       let self = this;
       instance.delegate.sendTransaction( _delegate, {from:self.address}).on('transactionHash', function(hash){
-        self.notifyBlockNative(self, hash);
+        //self.notifyBlockNative(self, hash);
+        self.txDelegateObservable$.next(hash);
       }).catch(e => {
             console.log(e);
             this.setStatus('Delegate error, see log');
@@ -198,7 +200,8 @@ export class Web3Service {
   public vote(instance, _proposalNum, _choice, _reason) {
       let self = this;
         instance.castVoteWithReason.sendTransaction(_proposalNum, _choice, _reason, {from:self.address}).on('transactionHash', function(hash){
-            self.notifyBlockNative(self, hash);
+            //self.notifyBlockNative(self, hash);
+            self.txVoteObservable$.next(hash);
         }).catch(e => {
             console.log(e);
             this.setStatus('Vote error, see log');

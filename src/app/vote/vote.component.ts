@@ -32,6 +32,8 @@ export class VoteComponent implements OnInit, OnDestroy {
     selectedChoice: string;
     voteModel: Vote = new Vote();
     proposalModel: Proposal = new Proposal();
+    delegateTx: String;
+    voteTx: String;
 
     getProposalForm: FormGroup;
     voteForm: FormGroup;
@@ -69,6 +71,12 @@ export class VoteComponent implements OnInit, OnDestroy {
             this.TokenERC20 = TokenAbstraction;
             this.getVoteData(this.voteModel.account);
         });        
+    });
+    this.web3Service.txDelegateObservable$.subscribe((hash) => {
+        this.delegateTx = hash;
+    });
+    this.web3Service.txVoteObservable$.subscribe((hash) => {
+        this.voteTx = hash;
     });
   }
 
