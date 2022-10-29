@@ -170,6 +170,27 @@ export class VoteComponent implements OnInit, OnDestroy {
       const deadline = await deployedGovernance.proposalDeadline.call(proposalObject.id);
       const eta = await deployedGovernance.proposalEta.call(proposalObject.id);
       const snapshot = await deployedGovernance.proposalSnapshot.call(proposalObject.id);
+      const state = await deployedGovernance.state.call(proposalObject.id);
+      this.proposalModel.state = state.words[0];
+
+      switch (this.proposalModel.state) {
+        case 0: this.proposalModel.stateString = 'Pending'
+            break;
+        case 1: this.proposalModel.stateString = 'Active'
+            break;
+        case 2: this.proposalModel.stateString = 'Canceled'
+            break;
+        case 3: this.proposalModel.stateString = 'Defeated'
+            break;
+        case 4: this.proposalModel.stateString = 'Succeeded'
+            break;
+        case 5: this.proposalModel.stateString = 'Queued'
+            break;
+        case 6: this.proposalModel.stateString = 'Expired'
+            break;
+        case 7: this.proposalModel.stateString = 'Executed'
+            break;
+      }
 
       this.proposalModel.deadline = deadline.words[0];
       this.proposalModel.eta = eta.words[0];

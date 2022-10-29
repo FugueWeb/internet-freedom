@@ -104,11 +104,16 @@ Faucets provide free `ether` on test networks. However, in order to prevent spam
 * [Optimism Faucet](https://optimismfaucet.xyz/) - To pass the anti-bot checks your GitHub account must be older than one month and you have to follow five people/projects on GitHub.
 * [Optimism Bridge](https://app.optimism.io/bridge/deposit) - Once you have that Goerli ETH, use this app to get it on the Optimism Goerli network.
 
-## Resources
+## Dev
 
-* [Fleek](https://app.fleek.co/)
+This project is a collection of the following open source projects and resources. At a high level you can divide it into an `Angular` frontend with an `IPFS` and `Ethereum` backend. To break that down further, the project is built and deployed from a connection between this GitHub repository and `Fleek`. The IPFS content hash of the single-page application is then associated through `ENS`. The app itself uses Truffle to interface on the Optimism Goerli testnet (layer two) with Open Zeppelin smart contracts.
+
+As this is an open source project, contributions are welcomed & encouraged! :smile: If you'd like to improve the code base, please see [Contributing Guidelines](https://github.com/fugueweb/internet-freedom/blob/master/.github/CONTRIBUTING.md).
+
 * [ENS Docs](https://docs.ens.domains/)
 * [IPFS](https://ipfs.tech/)
 * [Open Zeppelin](https://docs.openzeppelin.com/contracts/4.x/)
 * [Optimism](https://www.optimism.io/)
+* [Truffle](https://trufflesuite.com/docs/)
+* [Fleek](https://app.fleek.co/)
 * [Angular](https://angular.io/)

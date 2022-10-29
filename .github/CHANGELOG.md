@@ -1,3 +1,10 @@
+## 20221029
+
+* Added tx response link
+* Changes to About page for clarity
+* Improved error handling
+* Improved `getProposal` feedback
+
 ## 20221023
 
 * Added NFT functionality

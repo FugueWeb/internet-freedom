@@ -45,7 +45,7 @@
         <button mat-raised-button [disabled]="!getProposalForm.valid"
           (click)="getProposalDetails(selectedProposal)">Get</button>
 
-        <span *ngIf="proposalModel.tx != null"><strong> Deadline:</strong> {{proposalModel.deadline}} | <strong>Snapshot:</strong> {{proposalModel.snapshot}}<br>
+        <span *ngIf="proposalModel.tx != null"><strong> State:</strong> {{proposalModel.stateString}} | <strong>Deadline:</strong> <a class="if-link" href="https://goerli-optimism.etherscan.io/tx/{{proposalModel.deadline}}" target="_blank" title="Etherscan"> {{proposalModel.deadline}}</a> | <strong>Snapshot:</strong> <a class="if-link" href="https://goerli-optimism.etherscan.io/tx/{{proposalModel.snapshot}}" target="_blank" title="Etherscan"> {{proposalModel.snapshot}}</a><br>
           <strong>{{proposalModel.title}}</strong> | 
           <a class="if-link" href="https://goerli-optimism.etherscan.io/tx/{{proposalModel.tx}}" target="_blank" title="Etherscan">View on Etherscan</a> | 
           <a class="if-link" href="https://www.tally.xyz/governance/eip155:420:0xcDbeE6389C1215e659354465d8413438C8c94aE1/proposal/{{proposalModel.id}}"

@@ -5,6 +5,7 @@ export class Proposal {
     snapshot: number;
     votes: number; 
     state: number;
+    stateString: string;
     proposals: [{id:string, tx:string}];
     tx: string;
     title: string;
