@@ -85,8 +85,8 @@ const onboard = Onboard({
 export class Web3Service {
   private web3: Web3;
   private web3Provider: any;
-  private onboardUnsubscribe: Subscription;
   private address: string;
+  public success: boolean; //ChainID set, allows unsubscribe onDestroy
   public walletStateObservable$ = new Subject < WalletState[] > ();
   public providerObservable$ = new Subject < EIP1193Provider > ();
   public txDelegateObservable$ = new Subject < String > ();
@@ -94,14 +94,15 @@ export class Web3Service {
 
   constructor(private matSnackBar: MatSnackBar, private txService: TxService) {
     window.addEventListener('load', (event) => {
-      //this.blockNativeOnboard();
-      
       setInterval(()=> { this.refresh() }, 60 * 3000);
     });
   }
 
   ngOnDestroy(): void {
-    //this.onboardUnsubscribe.unsubscribe();
+    if(this.success){
+        const [primaryWallet] = onboard.state.get().wallets
+        onboard.disconnectWallet({ label: primaryWallet.label })
+    }
   }
 
   public async artifactsToContract(artifacts) {
@@ -125,34 +126,26 @@ export class Web3Service {
     const previouslyConnectedWallets = JSON.parse(
         window.localStorage.getItem('connectedWallets')
       )
-    console.log(previouslyConnectedWallets);
 
-    let wallets;      
+    let wallets;  
     if (previouslyConnectedWallets) {
         // Connect the most recently connected wallet (first in the array)
         wallets = await onboard.connectWallet({ autoSelect: { label: previouslyConnectedWallets[0], disableModals: true } });
     } else {
         wallets = await onboard.connectWallet();
-    }
-
-    //Require specific chain
-    const success = await onboard.setChain({ chainId: 0x1A4 });
-    this.setBNLocalStorage(wallets);
-    this.web3Provider = this.getWalletState()[0].provider
-    this.providerObservable$.next(this.getWalletState()[0].provider);
-    this.refresh();
-    return success;
-  }
-
-  private setBNLocalStorage(wallets){
-      const walletsSub = onboard.state.select('wallets')
-      this.onboardUnsubscribe = walletsSub.subscribe(wallets => {
-        const connectedWallets = wallets.map(({ label }) => label)
+        const connectedWallets = wallets.map(({ label }) => label);
         window.localStorage.setItem(
           'connectedWallets',
           JSON.stringify(connectedWallets)
         )
-      })
+    }
+
+    //Require specific chain
+    this.success = await onboard.setChain({ chainId: 0x1A4 });
+    this.web3Provider = this.getWalletState()[0].provider
+    this.providerObservable$.next(this.getWalletState()[0].provider);
+    this.refresh();
+    return this.success;
   }
 
   private notifyBlockNative(self: this, hash) {

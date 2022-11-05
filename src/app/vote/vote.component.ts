@@ -48,8 +48,8 @@ export class VoteComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    //this.web3Service.walletStateObservable$.unsubscribe();
-    //this.web3Service.providerObservable$.unsubscribe();
+    this.web3Service.walletStateObservable$.unsubscribe();
+    this.web3Service.providerObservable$.unsubscribe();
   }
 
   watchContract() {
