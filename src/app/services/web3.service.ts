@@ -101,7 +101,7 @@ export class Web3Service {
   }
 
   ngOnDestroy(): void {
-    this.onboardUnsubscribe.unsubscribe();
+    //this.onboardUnsubscribe.unsubscribe();
   }
 
   public async artifactsToContract(artifacts) {
