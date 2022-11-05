@@ -2,11 +2,13 @@
     {
         "id": "67055189529013655370311677697274540570780203233707436383708900754122826693893",
         "tx": "0xe204caf0476d168a786b380267d4c23716bc504f3f3064563790e632efcd2749",
-        "title": "Prop 7: Token transfer"
+        "title": "Prop 7: Token transfer",
+        "short_title": "Prop 7 | ID: 67055..." 
     },
     {
         "id": "72886658753229587777254017617640010358700500970663479445580996967037697753173",
         "tx": "0x493585cb15a855ba7581143184c42d4df400cadc55f3b24a18783e659a1d4909",
-        "title": "Prop 8: Transfer ETH 0x64C8"
+        "title": "Prop 8: Transfer ETH 0x64C8",
+        "short_title": "Prop 8 | ID: 72886..." 
     }
 ]

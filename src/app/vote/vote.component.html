@@ -1,7 +1,8 @@
 <div *ngIf="walletDisabled">
   <button mat-raised-button class="if-red-button" (click)="connectWallet(false)">Connect
     Wallet</button>
-  <p>A Web3 wallet is required to access this dapp. Please connect or consult the <a class="if-link" routerLink="/about">
+  <p>A Web3 wallet is required to access this dapp. Please connect or consult the <a class="if-link"
+      routerLink="/about">
       <mat-icon class="if-link snav-icon">info</mat-icon>About</a> page for more details.</p>
 </div>
 
@@ -17,9 +18,11 @@
       <mat-card-content>
         <button mat-card-avatar mat-icon-button title="Copy address" (click)="copyText(voteModel.account)">
           <mat-icon class="iconMargin">content_copy</mat-icon>
-          {{voteModel.account}}
         </button>
-        <p>Amount of DAO Tokens: <span id="balance">{{voteModel.balance}}</span></p>
+        {{voteModel.account}}
+        <p>Amount of DAO Tokens: <span id="balance">{{voteModel.balance}}</span> | <a class="if-link"
+            href="https://goerli-optimism.etherscan.io/address/{{voteModel.account}}" target="_blank"
+            title="Etherscan">View on Etherscan</a></p>
       </mat-card-content>
     </mat-card>
   </div>
@@ -32,24 +35,29 @@
         <mat-card-title>Get Proposal Details</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <span *ngIf="proposalModel.tx != null"><button mat-card-avatar mat-icon-button title="Copy Proposal ID"
-            (click)="copyText(proposalModel.id)">
-            <mat-icon class="iconMargin">content_copy</mat-icon>
-          </button></span>
         <mat-form-field id="prop-selector" class="address-field">
           <mat-select name="proposal" [(ngModel)]="selectedProposal" placeholder="Prop ID" formControlName="required">
-            <mat-option *ngFor="let p of proposalModel.proposals" [value]="p">{{p.id}}</mat-option>
+            <mat-option *ngFor="let p of proposalModel.proposals" [value]="p">{{p.short_title}}</mat-option>
           </mat-select>
           <mat-error *ngIf="getProposalForm.invalid">{{getProposalErrorMsg('empty')}}</mat-error>
         </mat-form-field>
         <button mat-raised-button [disabled]="!getProposalForm.valid"
-          (click)="getProposalDetails(selectedProposal)">Get</button>
-
-        <span *ngIf="proposalModel.tx != null"><strong> State:</strong> {{proposalModel.stateString}} | <strong>Deadline:</strong> <a class="if-link" href="https://goerli-optimism.etherscan.io/tx/{{proposalModel.deadline}}" target="_blank" title="Etherscan"> {{proposalModel.deadline}}</a> | <strong>Snapshot:</strong> <a class="if-link" href="https://goerli-optimism.etherscan.io/tx/{{proposalModel.snapshot}}" target="_blank" title="Etherscan"> {{proposalModel.snapshot}}</a><br>
-          <strong>{{proposalModel.title}}</strong> | 
-          <a class="if-link" href="https://goerli-optimism.etherscan.io/tx/{{proposalModel.tx}}" target="_blank" title="Etherscan">View on Etherscan</a> | 
-          <a class="if-link" href="https://www.tally.xyz/governance/eip155:420:0xcDbeE6389C1215e659354465d8413438C8c94aE1/proposal/{{proposalModel.id}}"
-            target="_blank" title="Tally">View on Tally</a>
+          (click)="getProposalDetails(selectedProposal)">Get</button><br>
+        <span *ngIf="proposalModel.tx != null"><button mat-card-avatar mat-icon-button title="Copy Proposal ID"
+            (click)="copyText(proposalModel.id)">
+            <mat-icon class="iconMargin">content_copy</mat-icon>
+          </button></span>
+        <span *ngIf="proposalModel.tx != null"><strong>{{proposalModel.title}}</strong> |
+          <a class="if-link" href="https://goerli-optimism.etherscan.io/tx/{{proposalModel.tx}}" target="_blank"
+            title="Etherscan">View on Etherscan</a> |
+          <a class="if-link"
+            href="https://www.tally.xyz/governance/eip155:420:0xcDbeE6389C1215e659354465d8413438C8c94aE1/proposal/{{proposalModel.id}}"
+            target="_blank" title="Tally">View on Tally</a><br><strong> State:</strong> {{proposalModel.stateString}} |
+          <strong>Deadline:</strong> <a class="if-link"
+            href="https://goerli-optimism.etherscan.io/tx/{{proposalModel.deadline}}" target="_blank" title="Etherscan">
+            {{proposalModel.deadline}}</a> | <strong>Snapshot:</strong> <a class="if-link"
+            href="https://goerli-optimism.etherscan.io/tx/{{proposalModel.snapshot}}" target="_blank" title="Etherscan">
+            {{proposalModel.snapshot}}</a>
         </span>
       </mat-card-content>
     </mat-card>
@@ -66,10 +74,18 @@
         <mat-card-title>Vote</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <mat-form-field>
-          <input type="text" matInput placeholder="Proposal ID" (change)="setProposalID($event)" formControlName="proposalID">
-          <mat-error *ngIf="voteForm.invalid">{{voteErrorMsg('proposalID')}}</mat-error>
+        <mat-form-field id="prop-selector" class="address-field">
+          <mat-select name="proposal" [(ngModel)]="selectedProposal" placeholder="Proposal ID"
+            formControlName="proposalID">
+            <mat-option *ngFor="let p of proposalModel.proposals" [value]="p">{{p.short_title}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="getProposalForm.invalid">{{getProposalErrorMsg('empty')}}</mat-error>
         </mat-form-field>
+        <!-- <mat-form-field>
+          <input type="text" matInput placeholder="Proposal ID" (change)="setProposalID($event)"
+            formControlName="proposalID">
+          <mat-error *ngIf="voteForm.invalid">{{voteErrorMsg('proposalID')}}</mat-error>
+        </mat-form-field> -->
         <!-- [(value)]="voteModel.choice" -->
         <mat-select name="vote" class="small-mat-select" [(ngModel)]="selectedChoice" placeholder="Cast Vote"
           formControlName="required1">
@@ -81,9 +97,10 @@
           <input type="text" matInput placeholder="Reason" (change)="setReason($event)" formControlName="required2">
           <mat-error *ngIf="voteForm.invalid">{{voteErrorMsg('required2')}}</mat-error>
         </mat-form-field>
-        <button mat-raised-button (click)="vote(selectedChoice)" [disabled]="!voteForm.valid">Vote</button><br>
-        <span *ngIf="voteTx != null"> 
-          <a class="if-link" href="https://goerli-optimism.etherscan.io/tx/{{voteTx}}" target="_blank" title="Etherscan">View on Etherscan</a>
+        <button mat-raised-button (click)="vote(selectedProposal.id, selectedChoice)" [disabled]="!voteForm.valid">Vote</button><br>
+        <span *ngIf="voteTx != null">
+          <a class="if-link" href="https://goerli-optimism.etherscan.io/tx/{{voteTx}}" target="_blank"
+            title="Etherscan">View on Etherscan</a>
         </span>
       </mat-card-content>
     </mat-card>
@@ -102,8 +119,9 @@
         <mat-error *ngIf="delegateForm.invalid">{{delegateErrorMsg('addr')}}</mat-error>
       </mat-form-field>
       <button mat-raised-button (click)="delegate()" [disabled]="!delegateForm.valid">Delegate</button><br>
-      <span *ngIf="delegateTx != null"> 
-        <a class="if-link" href="https://goerli-optimism.etherscan.io/tx/{{delegateTx}}" target="_blank" title="Etherscan">View on Etherscan</a>
+      <span *ngIf="delegateTx != null">
+        <a class="if-link" href="https://goerli-optimism.etherscan.io/tx/{{delegateTx}}" target="_blank"
+          title="Etherscan">View on Etherscan</a>
       </span>
     </mat-card>
   </div>

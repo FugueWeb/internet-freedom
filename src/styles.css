@@ -87,8 +87,7 @@ aside.bn-onboard-modal {
 }
 
 :root {
-    /* CUSTOMIZE THE COLOR  PALLETTE */
-    --account-center-z-index: 1;
+    --account-center-z-index: 2;
    /* CUSTOMIZE THE SHARED MODAL */
     --onboard-font-size-1: 3rem;
     /* HD WALLET ACCOUNT SELECT MODAL POSITIONING */

@@ -28,7 +28,7 @@ export class VoteComponent implements OnInit, OnDestroy {
     Governance: any;
     public walletState: WalletState[];
     public walletDisabled: boolean = true;
-    selectedProposal: {id: string, tx: string, title: string};
+    selectedProposal: {id: string, tx: string, title: string, short_title: string};
     selectedChoice: string;
     voteModel: Vote = new Vote();
     proposalModel: Proposal = new Proposal();
@@ -43,10 +43,8 @@ export class VoteComponent implements OnInit, OnDestroy {
     private txService: TxService, private fb: FormBuilder, private clipboard: Clipboard) { }
 
   ngOnInit(): void {
-    this.watchContract();
     this.createFormGroups();
     this.proposalModel.proposals = proposals;
-    console.log(this.proposalModel.proposals);
   }
 
   ngOnDestroy(): void {
@@ -81,14 +79,15 @@ export class VoteComponent implements OnInit, OnDestroy {
   }
 
   connectWallet(change: boolean): void {
-    const result = this.web3Service.blockNativeOnboard();
-
-    if (result){
-        this.walletDisabled = false;
-    } else {
-        this.walletDisabled = true;
-        console.log('could not connect wallet');
-    }
+    this.watchContract();
+    const result = this.web3Service.blockNativeOnboard().then(success => {
+        if (success){
+            this.walletDisabled = false;
+        } else {
+            this.walletDisabled = true;
+            console.log('could not connect wallet');
+        }
+    });
   }
 
   async getVoteData(account) {
@@ -112,7 +111,8 @@ export class VoteComponent implements OnInit, OnDestroy {
     this.voteForm = this.fb.group({
       required1: ['', Validators.required],
       required2: ['', Validators.required],
-      proposalID: ['', [Validators.required, Validators.minLength(77), Validators.maxLength(78)]],
+      proposalID: ['', Validators.required]
+      //proposalID: ['', [Validators.required, Validators.minLength(77), Validators.maxLength(78)]],
     });
 
     this.delegateForm = this.fb.group({
@@ -138,10 +138,10 @@ export class VoteComponent implements OnInit, OnDestroy {
 
   /************* SETTER FUNCTIONS *************/
 
-  setProposalID(e) {
-    console.log('Setting Proposal ID: ' + e.target.value);
-    this.voteModel.proposalID = e.target.value;
-  }
+//   setProposalID(e) {
+//     console.log('Setting Proposal ID: ' + e.target.value);
+//     this.voteModel.proposalID = e.target.value;
+//   }
 
   setReason(e) {
     console.log('Setting reason: ' + e.target.value);
@@ -155,7 +155,7 @@ export class VoteComponent implements OnInit, OnDestroy {
 
   /************* CONTRACT FUNCTIONS *************/
 
-  async getProposalDetails(proposalObject: {id: string, tx: string, title: string}) {
+  async getProposalDetails(proposalObject: {id: string, tx: string, title: string, short_title: string}) {
     console.log(proposalObject)
     if (!this.TokenERC20) {
       this.setStatus('TokenERC20 is not loaded, unable to send transaction');
@@ -225,31 +225,31 @@ export class VoteComponent implements OnInit, OnDestroy {
       }
   }
 
-  async vote(choice) {
+  async vote(propID, choice) {
     if (!this.Governance) {
       this.setStatus('Governance is not loaded, unable to send transaction');
       return;
     }
 
     this.voteModel.choice = choice;
-    const proposalNum = this.voteModel.proposalID;
+    //const proposalNum = this.voteModel.proposalID;
     const reason = this.voteModel.reason;
 
     let c;
     switch (this.voteModel.choice) {
-        case 'for': c = 1
-            break;
         case 'against': c = 0
+            break;
+        case 'for': c = 1
             break;
         case 'abstain': c = 2
             break;
     }
 
-    console.log('Vote "' + this.voteModel.choice + '" on proposal ' + proposalNum + ' because ' + reason);
+    console.log('Vote "' + this.voteModel.choice + '" on proposal ' + propID + ' because ' + reason);
     this.setStatus('Initiating transaction... (please wait)');
     try {
         const deployedGovernance = await this.Governance.deployed();
-        this.web3Service.vote(deployedGovernance, proposalNum, c, reason);
+        this.web3Service.vote(deployedGovernance, propID, c, reason);
       } catch (e) {
         console.log(e);
         this.setStatus('Error voting; see log.');

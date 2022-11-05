@@ -1,3 +1,9 @@
+## 20221105
+
+* Improves to web3 service
+* Updates to About page
+* Improvements to UX in vote/onboarding experience 
+
 ## 20221029
 
 * Added tx response link

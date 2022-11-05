@@ -96,12 +96,12 @@ export class Web3Service {
     window.addEventListener('load', (event) => {
       //this.blockNativeOnboard();
       
-      setInterval(()=> { this.refresh() }, 60 * 1000);
+      setInterval(()=> { this.refresh() }, 60 * 3000);
     });
   }
 
   ngOnDestroy(): void {
-    //this.onboardUnsubscribe.unsubscribe();
+    this.onboardUnsubscribe.unsubscribe();
   }
 
   public async artifactsToContract(artifacts) {
@@ -141,6 +141,7 @@ export class Web3Service {
     this.web3Provider = this.getWalletState()[0].provider
     this.providerObservable$.next(this.getWalletState()[0].provider);
     this.refresh();
+    return success;
   }
 
   private setBNLocalStorage(wallets){
