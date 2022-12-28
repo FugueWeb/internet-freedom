@@ -1,7 +1,7 @@
 {
   "name": "internet-freedom",
   "author": "FugueWeb",
-  "version": "0.10.2022",
+  "version": "0.12.2022",
   "description": "Internet Freedom + ENS + IPFS",
   "scripts": {
     "ng": "ng",
